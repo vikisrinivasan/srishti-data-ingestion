@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<link href="{% static 'css/home/home.css' %}" rel="stylesheet">
+<link href="{% static 'css/fileupload/upload.css' %}" rel="stylesheet">
+<script src="{% static 'js/fileupload/upload.js' %}"></script>
+<div class="d-flex h-100 text-center text-white bg-dark">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <input name="csrfmiddlewaretoken" value="{{csrf_token}}" hidden>
+    <header class="mb-auto">
+        <div>
+
+            <nav class="nav nav-masthead justify-content-center float-md-end">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+
+            </nav>
+        </div>
+    </header>
+    <div>
+        <div class="wrapper">
+            <header class="data-upload-header">
+                <h1>Data Upload</h1>
+            </header>
+
+            <div class="ways">
+                <ul>
+                    <li class="active">
+                        submit
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sections">
+                <section class="active">
+                    <input type="text" placeholder="Title" id="title"/>
+                    <select id="datatype">
+                        <option value="transaction">Transaction</option>
+                        <option value="event">Event</option>
+                        <option value="Leads">Leads</option>
+                    </select>
+
+                    <div class="select-option">
+                        <div class="head">DataType</div>
+                        <div class="option"></div>
+                    </div>
+                    <div class="images">
+                        <div class="pic">
+                            add
+                        </div>
+                    </div>
+
+
+                </section>
+
+                <section>
+                    <input type="text" placeholder="Topic" id="topic"/>
+                    <textarea placeholder="something..." id="msg"></textarea>
+                </section>
+
+            </div>
+
+            <footer>
+                <ul>
+                    <li><span id="reset">reset</span></li>
+                    <li><span id="send">send</span></li>
+                </ul>
+            </footer>
+
+        </div>
+        <div class="notification"></div>
+    </div>
+</div>
+</div>
+{% else %}
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}

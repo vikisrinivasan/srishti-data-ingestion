@@ -1,0 +1,36 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link href="{% static 'css/signin/signin.css' %}" rel="stylesheet">
+
+<main class="form-signin">
+    <form id="login-form" method="post">
+        <div class="logo">
+        <img class="mb-4 " src="{% static 'logo/1.png' %}" alt="logo" width="72" height="57">
+        <h1 class="h4 mb-3 fw-normal">Please sign in</h1>
+        </div>
+        {% csrf_token %}
+        <div class="form-floating">
+            <input type="text" class="form-control" id="id_username"  name="username"  placeholder="Username">
+            <label for="id_username">UserName</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="id_password" name="password" placeholder="Password">
+            <label for="id_password">Password</label>
+        </div>
+        {% if form.errors %}
+        <p class=" label label-danger">
+            Your username and password didn't match.
+            Please try again.
+        </p>
+        {% endif %}
+
+        <button class="w-100 btn btn-lg btn-primary"  type="submit">Log In</button>
+        <input type="hidden" name="next" value="{{next}}" />
+    </form>
+</main>
+
+
+
+{% endblock content %}
