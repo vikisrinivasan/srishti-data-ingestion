@@ -1,0 +1,79 @@
+
+{% block content %}
+{% for map in mapping_columns %}
+{% for model_type,model_columns in original_cols.items %}
+<fieldset class="{{model_type}}">
+
+        <div class="form-card" style=" overflow: auto !important;
+    height: 500px;">
+            <div style="color: black;
+    font-style: monochrome;
+    font-family: montserrat;
+    font-weight: bold;
+    font-size: 23px;
+    text-align: center">
+            <p style="color:black">Please input the mapping for {{model_type}} Table </p>
+                <p style="color:black">filename: {{map.filename}} </p>
+                <p style="color:black">Sheetname: {{map.sheetname}}</p>
+            </div>
+            <br>
+            <br>
+            <table class="mapping_table table table-striped" style="    width: 50%;
+    margin-left: auto;
+    margin-right: auto;">
+                <thead>
+                <tr>
+                    <th scope="col">Database Column</th>
+                    <th scope="col">Mapping Column</th>
+                </tr>
+                </thead>
+                <tbody>
+                {%for col in model_columns %}
+                <tr>
+                    <td>
+                        <p style="color:black" class="column_name"><b>{{col.0}}</b></p>
+                        <sub>Description :{{col.1}}</sub>
+                    </td>
+                    <td>
+                        <select style="width:100%" class="form-select" >
+                            {% for col in map.columns %}
+                            <option id="{{col}}">{{col}}</option>
+                            {% endfor %}
+                            <option id="auto">Auto Generate</option>
+                            <option id="unknown">Unknown</option>
+                        </select>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div>
+
+            </div>
+
+        </div>
+
+        <input type="button" name="next"  class="next action-button" value="Next"/>
+        <input type="button" name="previous" class="previous action-button-previous" value="Back"/>
+    <button type="button" id="mapping_save"  class="btn btn-outline-primary" style="width: 150px;
+    background: white;
+    font-weight: bold;
+    color: black;
+    border: 17 none;
+    border-radius: 16px;
+    cursor: pointer;
+    padding: 10px 5px;
+    border: 2px solid #77a464;">Save Mapping</button>
+    </fieldset>
+{% endfor %}
+{% endfor %}
+<input name="csrfmiddlewaretoken" value="{{csrf_token}}" hidden>
+<input class="data_type" value="{{type}}" hidden>
+<style>
+    table, th, td {
+      border: 1px solid black;
+    }
+
+</style>
+
+{% endblock %}

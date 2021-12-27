@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ingestion'
 ]
 
 MIDDLEWARE = [
@@ -68,8 +69,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ingestion.wsgi.application'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL= '/accounts'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL= 'login'
 
 
 # Database

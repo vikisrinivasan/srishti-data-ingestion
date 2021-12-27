@@ -1,4 +1,6 @@
-
+.pic{
+border: 1px solid #77a464;
+}
 
 .wrapper  {
   background-color: #fff;
@@ -62,13 +64,8 @@ h1 {
   border-left: 0;
 }
 .ways li.active {
-  border: 2px solid #1AA1E5;
-  color: #66676C;
-}
-.ways li.active::before {
-  content: '\f00c';
-  font-family: 'fontawesome';
-  color: #1AA1E5;
+  border: 2px solid #77a464;
+  color: black;
 }
 .ways li:not(.active) {
   padding: 16px 0;
@@ -79,6 +76,14 @@ section {
 section.active {
   display: block;
 }
+#title:focus{
+    outline: 1px solid #77a464 !important;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
 section input,
 section textarea {
   display: block;
@@ -97,7 +102,10 @@ section textarea {
 section select {
   display: none;
 }
-
+.option{
+    font-family: montserrat;
+    color: #2C3E50;
+}
 .select-option {
   background-color: #F5F7FA;
   color: #999;
@@ -122,6 +130,8 @@ section select {
 .select-option div:last-child,
 .select-option .head {
   border-bottom: 1px solid #ddd;
+    font-family: montserrat;
+    color: #2C3E50;
 }
 .select-option .option {
   display: none;
@@ -193,12 +203,14 @@ section select {
   color: #fff;
 }
 .images .pic {
+   border: 1px solid #515151;
   background-color: #F5F7FA;
   align-self: center;
   text-align: center;
   padding: 40px 0;
   text-transform: uppercase;
-  color: #848EA1;
+    font-family: montserrat;
+    color: #2C3E50;
   font-size: 12px;
   cursor: pointer;
 }

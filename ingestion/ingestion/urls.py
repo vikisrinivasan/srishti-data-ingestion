@@ -22,7 +22,9 @@ from . import views
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url(r'^accounts/$', auth_views.LoginView.as_view(template_name='login.html'),name='login'),
-    url(r'^upload/$',views.upload_files,name='upload_files'),
-    path('', TemplateView.as_view(template_name='home.html'), name='home')
+    url(r'^accounts/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    url(r'^logout/$', auth_views.LogoutView.as_view(template_name='login.html'), name='logout'),
+    url(r'^upload/$', views.upload_files, name='upload_files'),
+    url(r'^save/$', views.save_files, name='save_files'),
+    path('', TemplateView.as_view(template_name='home_new.html'), name='home')
 ]

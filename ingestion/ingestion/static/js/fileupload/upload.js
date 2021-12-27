@@ -1,6 +1,5 @@
 (function ($) {
   $(document).ready(function () {
-
     generateID()
     choose()
     generateOption()
@@ -19,7 +18,111 @@
     var fullStock = 10
     var speedCloseNoti = 1000
     var form_data = new FormData();
+    var file_arr=[]
+    var currentTab = 0; // Current tab is set to be the first tab (0)
+    showTab(currentTab); // Display the current ta
 
+    var current_fs, next_fs, previous_fs; //fieldsets
+    var opacity;
+    var current = 1;
+    var steps = 3
+
+    setProgressBar(current);
+    multiStepView()
+    function multiStepView(){
+    $(document).on("click",".next",function() {
+    console.log("hi")
+    current_fs = $(this).parent();
+    next_fs = $(this).parent().next();
+
+    //Add Class Active
+    $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+    //show the next fieldset
+    next_fs.show();
+    //hide the current fieldset with style
+    current_fs.animate({opacity: 0}, {
+    step: function(now) {
+    // for making fielset appear animation
+    opacity = 1 - now;
+
+    current_fs.css({
+    'display': 'none',
+    'position': 'relative'
+    });
+    next_fs.css({'opacity': opacity});
+    },
+    duration: 500
+    });
+    setProgressBar(++current);
+    });
+    $(document).on("click",".previous",function() {
+
+    current_fs = $(this).parent();
+    previous_fs = $(this).parent().prev();
+
+    //Remove class active
+    $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+    //show the previous fieldset
+    previous_fs.show();
+
+    //hide the current fieldset with style
+    current_fs.animate({opacity: 0}, {
+    step: function(now) {
+    // for making fielset appear animation
+    opacity = 1 - now;
+
+    current_fs.css({
+    'display': 'none',
+    'position': 'relative'
+    });
+    previous_fs.css({'opacity': opacity});
+    },
+    duration: 500
+    });
+    setProgressBar(--current);
+    });
+    }
+
+    function setProgressBar(curStep){
+    var percent = parseFloat(100 / steps) * curStep;
+    percent = percent.toFixed();
+    $(".progress-bar")
+    .css("width",percent+"%")
+    }
+
+    $(".submit").click(function(){
+    return false;
+    })
+    $(document).on("click","#mapping_save",function() {
+                    original_cols=[]
+                    mapped_cols=[]
+                    var csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+                    var type=$('.data_type').val();
+                    var sheetname= $("fieldset:visible").find('#sheetname').val();
+                    var filename= $("fieldset:visible").find('#filename').val();
+                    var modeltype= $("fieldset:visible").find('#modeltype').val();
+                     $("fieldset:visible").find(".mapping_table tr").each(function(){
+                              original_cols.push($(this).find("td:nth-child(1)").text())
+                              mapped_cols.push($(this).find(":selected").val())
+                     })
+                   $.ajax({
+                             url: "save/",
+                             method: "POST",
+                             data: JSON.stringify({'type':type,'original_cols':original_cols,'mapped_cols':mapped_cols,'sheetname':sheetname,
+                             'filename':filename,'modeltype':modeltype}),
+                             contentType: "application/json",
+                             dataType:"json",
+                             headers:{'X-CSRFToken':csrf_token},
+                             success: function (response) {
+                                   alert('Data Saved')
+                             }
+                   })
+
+
+
+            });
     function generateID() {
       var text = $('header span')
       var newID = ''
@@ -40,7 +143,6 @@
         index = $(this).index()
         $(this).addClass('active')
         $(this).siblings().removeClass('active')
-
         section.siblings().removeClass('active')
         section.eq(index).addClass('active')
         if(!way) {
@@ -88,14 +190,12 @@
       var uploader = $('<input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>')
       var images = $('.images')
 
-
       button.on('click', function () {
         uploader.click()
       })
 
       uploader.on('change', function () {
           var reader = new FileReader()
-
           reader.fileName = uploader[0].files[0].name
           reader.onload = function(event) {
             images.prepend('<div class="" style="background-color: #F5F7FA; text-align: center; padding: 40px 6px;text-transform: uppercase; color: black;font-size: 12px;cursor: pointer;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;width: 112px;margin-right: 12px;"><span>'+event.target.fileName+'</span></div>')
@@ -103,9 +203,8 @@
           reader.readAsDataURL(uploader[0].files[0])
           form_data.append("title",$('#title').val())
           form_data.append('type',$('#datatype').val())
-          form_data.append('file',uploader[0].files[0])
-
-       })
+          form_data.append(reader.fileName,uploader[0].files[0])
+      })
 
       images.on('click', '.img', function () {
         $(this).remove()
@@ -127,16 +226,62 @@
           for(var i = 0; i < form_data.length; i++) {
             imageArr.push({file: form_data[i]})
           }
-
-
+//          form_data.append('files',imageArr)
           sendData()
-
-
       })
     }
 
+    function showTab(n) {
+      // This function will display the specified tab of the form...
+      var x = document.getElementsByClassName("wrapper");
+      x[n].style.display = "block";
+
+    }
+
+    function nextPrev(n) {
+          // This function will figure out which tab to display
+          var x = document.getElementsByClassName("wrapper");
+          // Exit the function if any field in the current tab is invalid:
+          // Hide the current tab:
+          x[currentTab].style.display = "none";
+          // Increase or decrease the current tab by 1:
+          currentTab = currentTab + n;
+
+          // Otherwise, display the correct tab:
+          showTab(currentTab);
+    }
+
+//    function mappingSave(){
+//
+//           console.log("hi");
+//           $("#mapping_table tr").click(function(){
+//                  $(this).find("td").each(function(){
+//                       console.log($(this).html())
+//                  });
+//              });
+////             $.ajax({
+////                        url: "save/",
+////                        method: "POST",
+////                        data:  ,
+////                        cache: false,
+////                        processData: false,
+////                        contentType: false,
+////                        headers:{'X-CSRFToken':csrf_token},
+////                        enctype: 'multipart/form-data',
+////                        success: function (response) {
+////                              $('#wrapper1').html(response);
+////                              nextPrev(1)
+////                        }
+////                    })
+//
+//    }
+ // <-- time in milliseconds
     function sendData(){
+        console.log("hi")
         csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+        setTimeout(function() {
+            $('.alert-success').fadeOut('slow');
+        },500000);
         $.ajax({
             url: "upload/",
             method: "POST",
@@ -147,7 +292,10 @@
             headers:{'X-CSRFToken':csrf_token},
             enctype: 'multipart/form-data',
             success: function (response) {
-                console.log(response, typeof(response))
+                  $('.alert-success').show()
+                  $('.next').prop("disabled", false);
+                  $('#msform').append(response);
+                  steps = $("fieldset").length;
             }
         })
 
@@ -187,7 +335,7 @@
 
           if(queue.length > 0) {
             if(queue[0].type == 2) {
-              text = ' Your discusstion is sent'
+              text = ' Your discussion is sent'
             } else {
               text = ' Your order is allowed.'
             }

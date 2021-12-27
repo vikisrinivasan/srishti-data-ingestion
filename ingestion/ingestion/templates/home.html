@@ -9,7 +9,7 @@
 <div class="d-flex h-100 text-center text-white bg-dark">
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <input name="csrfmiddlewaretoken" value="{{csrf_token}}" hidden>
-    <header class="mb-auto">
+    <header>
         <div>
 
             <nav class="nav nav-masthead justify-content-center float-md-end">
@@ -36,9 +36,11 @@
                 <section class="active">
                     <input type="text" placeholder="Title" id="title"/>
                     <select id="datatype">
-                        <option value="transaction">Transaction</option>
-                        <option value="event">Event</option>
-                        <option value="Leads">Leads</option>
+                        <option value="TRAN">Transaction</option>
+                        <option value="ET">Events</option>
+                        <option value="Leads-ID">Leads (Individual)</option>
+                        <option value="Leads-RD">Leads (Redistributors)</option>
+                        <option value="PO">ProductCatalogue</option>
                     </select>
 
                     <div class="select-option">
@@ -63,15 +65,34 @@
 
             <footer>
                 <ul>
-                    <li><span id="reset">reset</span></li>
-                    <li><span id="send">send</span></li>
+                    <li><span id="send">Next</span></li>
+
                 </ul>
             </footer>
+
+        </div>
+        <div id="wrapper1" class="wrapper" style="width:406px;display:none;overflow-x: auto;
+height: 400px;">
 
         </div>
         <div class="notification"></div>
     </div>
 </div>
+<!--    {% if }-->
+<!--    <div>-->
+<!--        <table class="table">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th scope="col">Seq No</th>-->
+<!--                <th scope="col">Columns</th>-->
+<!--                <th scope="col">Mapping Column</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
 </div>
 {% else %}
 <p>You are not logged in</p>
