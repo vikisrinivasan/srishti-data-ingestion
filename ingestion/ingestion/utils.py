@@ -9,3 +9,17 @@ def clear_dir(dir_path):
         return True
     except Exception as e:
         raise "Please Check the Directory"
+
+def save_json(json_obj,filename):
+    import json
+    out_file = open("%s.json"%filename, "w")
+    json.dump(json_obj, out_file)
+    out_file.close()
+
+
+def read_json(path):
+    import json
+    out_file = open(path)
+    data = json.load(out_file)
+    out_file.close()
+    return data

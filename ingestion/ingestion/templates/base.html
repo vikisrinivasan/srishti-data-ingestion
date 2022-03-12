@@ -3,20 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+<!--    <link href="{% static 'css/home/home.css' %}" rel="stylesheet">-->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
     <link href="{% static 'css/home/home.css' %}" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body  class="text-center">
+<div class="d-flex h-100 text-center">
+    <div class="container-sm">
+        <header>
+            <div>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <a class="nav-link active" aria-current="page" href="{% url 'logout' %}" style="color:black" >Logout</a>
+                </nav>
+            </div>
+        </header>
             {% block content %}
 
             {% endblock %}
+    </div>
+</div>
 
 </body>
 

@@ -1,0 +1,43 @@
+
+{% block content %}
+<fieldset class="mapping_selection_screen">
+            <div class="row">
+                <div class="col-sm-3" style="color:black">
+                     File Name
+                </div>
+                <div class="col-sm-7" style="margin-bottom: 9px;">
+                    <select id='mapping_filename_attr' class="form-select" >
+                    <option id="{{mapping_columns.0.filename}}"> {{mapping_columns.0.filename}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3" style="color:black">
+                    Sheet Name
+                </div>
+                <div  class="col-sm-7" style="margin-bottom: 9px;">
+                    <select id='mapping_sheetname_attr' class="form-select"  >
+                        {% for map in mapping_columns %}
+                        <option id="{{map.sheetname}}">{{map.sheetname}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3" style="color:black">
+                    Model Type
+                </div>
+                <div class="col-sm-7" style="margin-bottom: 9px;">
+                    <select id='mapping_modeltype_attr' class="form-select" aria-label="Disabled select example" >
+                        {%for model_type in original_cols %}
+                        <option id="{{model_type}}">{{model_type}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+            </div>
+        <input type="button"  id="generate_mapping"  name="generate_mapping"  class="generate_mapping action-button" value="Generate Mapping" style="width:174px"/>
+        <input type="button" name="next"  class="next action-button" value="Next"/>
+        <input type="button" name="previous" class="previous action-button-previous" value="Back"/>
+</fieldset>
+
+{% endblock %}

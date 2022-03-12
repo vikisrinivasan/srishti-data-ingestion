@@ -1,4 +1,4 @@
-from . import CameraDetails,ColorCode,contacts,EventContact,ItemMaster,Events,leads,ProductsOffered,resdis,Sales
+from . import CameraDetails,ColorCode,contacts,EventContact,ItemMaster,Events,leads,ProductsOffered,Sales
 __all__ = [
     'CameraDetails',
     'ColorCode',
@@ -8,6 +8,5 @@ __all__ = [
     'ItemMaster',
     'leads',
     'ProductsOffered',
-    'resdis',
     'Sales'
 ]

@@ -1,101 +1,58 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
-{% if user.is_authenticated %}
-<link href="{% static 'css/home/home.css' %}" rel="stylesheet">
-<link href="{% static 'css/fileupload/upload.css' %}" rel="stylesheet">
-<script src="{% static 'js/fileupload/upload.js' %}"></script>
-<div class="d-flex h-100 text-center text-white bg-dark">
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <input name="csrfmiddlewaretoken" value="{{csrf_token}}" hidden>
-    <header>
-        <div>
 
-            <nav class="nav nav-masthead justify-content-center float-md-end">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-
-            </nav>
-        </div>
-    </header>
-    <div>
-        <div class="wrapper">
-            <header class="data-upload-header">
-                <h1>Data Upload</h1>
-            </header>
-
-            <div class="ways">
-                <ul>
-                    <li class="active">
-                        submit
-                    </li>
-                </ul>
-            </div>
-
-            <div class="sections">
-                <section class="active">
-                    <input type="text" placeholder="Title" id="title"/>
-                    <select id="datatype">
-                        <option value="TRAN">Transaction</option>
-                        <option value="ET">Events</option>
-                        <option value="Leads-ID">Leads (Individual)</option>
-                        <option value="Leads-RD">Leads (Redistributors)</option>
-                        <option value="PO">ProductCatalogue</option>
-                    </select>
-
-                    <div class="select-option">
-                        <div class="head">DataType</div>
-                        <div class="option"></div>
-                    </div>
-                    <div class="images">
-                        <div class="pic">
-                            add
+<div class="section_our_solution">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="our_solution_category">
+                <div class="solution_cards_box">
+                    <div class="solution_card">
+                        <div class="hover_color_bubble"></div>
+                        <div class="so_top_icon">
+                            <i class="fa fa-upload fa-2x"></i>
+                        </div>
+                        <div class="solu_title">
+                            <h3>File Mapping & Upload Menu</h3>
+                        </div>
+                        <div class="solu_description">
+                            <p>
+                                This Menu is for Uploading Data into Database from Excel
+                                File Mapping is required for the data to be uploaded
+                            </p>
+                            <button type="button" class="read_more_btn" onclick="location.href='{% url 'upload' %}'"
+                            >Upload
+                            </button>
                         </div>
                     </div>
-
-
-                </section>
-
-                <section>
-                    <input type="text" placeholder="Topic" id="topic"/>
-                    <textarea placeholder="something..." id="msg"></textarea>
-                </section>
-
+                </div>
             </div>
 
-            <footer>
-                <ul>
-                    <li><span id="send">Next</span></li>
-
-                </ul>
-            </footer>
+        </div>
+        <div class="col-md-4">
+            <div class="our_solution_category">
+                <div class="solution_cards_box">
+                    <div class="solution_card">
+                        <div class="hover_color_bubble"></div>
+                        <div class="so_top_icon">
+                            <i class="fa fa-pencil-square-o fa-2x"></i>
+                        </div>
+                        <div class="solu_title">
+                            <h3>Data Editing Menu</h3>
+                        </div>
+                        <div class="solu_description">
+                            <p>
+                                This Menu is for Editing existing data in database,
+                                Table like widow will be shown to edit the existing data
+                            </p>
+                            <button type="button" class="read_more_btn" id="edit">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
-        <div id="wrapper1" class="wrapper" style="width:406px;display:none;overflow-x: auto;
-height: 400px;">
-
-        </div>
-        <div class="notification"></div>
     </div>
 </div>
-<!--    {% if }-->
-<!--    <div>-->
-<!--        <table class="table">-->
-<!--            <thead>-->
-<!--            <tr>-->
-<!--                <th scope="col">Seq No</th>-->
-<!--                <th scope="col">Columns</th>-->
-<!--                <th scope="col">Mapping Column</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--            <tbody>-->
 
-<!--            </tbody>-->
-<!--        </table>-->
-<!--    </div>-->
-</div>
-{% else %}
-<p>You are not logged in</p>
-<a href="{% url 'login' %}">Log In</a>
-{% endif %}
 {% endblock %}

@@ -3,7 +3,7 @@
 {% load static %}
 {% block content %}
 <link href="{% static 'css/signin/signin.css' %}" rel="stylesheet">
-
+<div class="row justify-content-center">
 <main class="form-signin">
     <form id="login-form" method="post">
         <div class="logo">
@@ -30,6 +30,7 @@
         <input type="hidden" name="next" value="{{next}}" />
     </form>
 </main>
+</div>
 
 
 

@@ -20,11 +20,16 @@ from django.contrib.auth import views as auth_views
 from django.views.generic.base import TemplateView
 from . import views
 
+admin.site.site_header = "Srishti Admin Portal"
+
 urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'^accounts/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     url(r'^logout/$', auth_views.LogoutView.as_view(template_name='login.html'), name='logout'),
-    url(r'^upload/$', views.upload_files, name='upload_files'),
-    url(r'^save/$', views.save_files, name='save_files'),
-    path('', TemplateView.as_view(template_name='home_new.html'), name='home')
+    url(r'^upload_file/$', views.upload_files, name='upload_files'),
+    url(r'^render_mapping/$', views.render_mapping, name='render_mapping'),
+    url(r'^save_mapping/$', views.save_mapping, name='save_mapping'),
+    url('^upload_menu/$', TemplateView.as_view(template_name='upload_menu.html'), name='upload'),
+    url(r'^edit_menu/$',views.LeadsTableView.as_view(),name='edit_menu'),
+    url('', TemplateView.as_view(template_name='home.html'), name='home')
 ]

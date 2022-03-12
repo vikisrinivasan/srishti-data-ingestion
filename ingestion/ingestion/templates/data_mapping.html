@@ -1,9 +1,7 @@
-
 {% block content %}
 {% for map in mapping_columns %}
-{% for model_type,model_columns in original_cols.items %}
 <fieldset class="{{model_type}}">
-
+         <input id="modeltype" value="{{model_type}}" hidden>
         <div class="form-card" style=" overflow: auto !important;
     height: 500px;">
             <div style="color: black;
@@ -12,13 +10,15 @@
     font-weight: bold;
     font-size: 23px;
     text-align: center">
+                <input id="filename" value="{{map.filename}}" hidden>
+                <input id="sheetname" value="{{map.sheetname}}" hidden>
             <p style="color:black">Please input the mapping for {{model_type}} Table </p>
                 <p style="color:black">filename: {{map.filename}} </p>
                 <p style="color:black">Sheetname: {{map.sheetname}}</p>
             </div>
             <br>
             <br>
-            <table class="mapping_table table table-striped" style="    width: 50%;
+            <table class="mapping_table table table-striped" style="    width: 80%;
     margin-left: auto;
     margin-right: auto;">
                 <thead>
@@ -28,7 +28,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {%for col in model_columns %}
+                {% for col in original_cols %}
                 <tr>
                     <td>
                         <p style="color:black" class="column_name"><b>{{col.0}}</b></p>
@@ -53,7 +53,6 @@
 
         </div>
 
-        <input type="button" name="next"  class="next action-button" value="Next"/>
         <input type="button" name="previous" class="previous action-button-previous" value="Back"/>
     <button type="button" id="mapping_save"  class="btn btn-outline-primary" style="width: 150px;
     background: white;
@@ -66,14 +65,5 @@
     border: 2px solid #77a464;">Save Mapping</button>
     </fieldset>
 {% endfor %}
-{% endfor %}
-<input name="csrfmiddlewaretoken" value="{{csrf_token}}" hidden>
-<input class="data_type" value="{{type}}" hidden>
-<style>
-    table, th, td {
-      border: 1px solid black;
-    }
-
-</style>
 
 {% endblock %}
