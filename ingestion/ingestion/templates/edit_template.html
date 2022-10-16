@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load bootstrap3 %}
+<style>
+    .input-control{
+      margin-top:5px;
+      width:40%;
+    }
+</style>
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+        <button class="button is-success is-fullwidth is-medium mt-5"
+                type="submit">Save
+        </button>
+        <button class="button is-success is-fullwidth is-medium mt-5"   type='submit' onclick="location.href='{% url 'edit_menu' model_name='EventRegistration' %}';">Back
+        </button>
+    </form>
+</div>
+{%endblock%}
+

@@ -211,11 +211,13 @@ max-width: 100% !important;
   color: black;
   background-color: transparent;
   border-bottom: .25rem solid transparent;
+    border:none;
 }
 
 .nav-masthead .nav-link:hover,
 .nav-masthead .nav-link:focus {
   border-bottom-color: black;
+  border:none;
 }
 
 .nav-masthead .nav-link + .nav-link {
@@ -225,4 +227,5 @@ max-width: 100% !important;
 .nav-masthead .active {
   color: black;
   border-bottom-color: black;
+    border:none;
 }

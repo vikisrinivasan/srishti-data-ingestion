@@ -1,6 +1,20 @@
 import os
 import glob
 import shutil
+
+from django.db.models.fields import CharField, IntegerField,DateField
+from pandas.core.dtypes.common import is_string_dtype, is_numeric_dtype, is_datetime64_any_dtype
+
+
+def get_field_type(df,col):
+   if  is_string_dtype(df[col]):
+       return CharField
+   elif is_numeric_dtype(df[col]):
+       return IntegerField
+   elif is_datetime64_any_dtype(df[col]):
+       return DateField
+
+
 def clear_dir(dir_path):
     try:
         if os.path.exists(dir_path):

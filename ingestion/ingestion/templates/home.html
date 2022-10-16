@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+{% if not user.is_authenticated %}
+{%endif%}
 
 <div class="section_our_solution">
     <div class="row">
@@ -43,9 +45,10 @@
                         <div class="solu_description">
                             <p>
                                 This Menu is for Editing existing data in database,
-                                Table like widow will be shown to edit the existing data
+                                Table like window will be shown to edit or delete
+                                the existing data
                             </p>
-                            <button type="button" class="read_more_btn" id="edit">Edit</button>
+                            <button type="button" class="read_more_btn" id="edit" onclick="location.href='/edit_menu/EventRegistration'">Edit</button>
                         </div>
                     </div>
                 </div>
@@ -55,4 +58,4 @@
     </div>
 </div>
 
-{% endblock %}
+{%endblock%}

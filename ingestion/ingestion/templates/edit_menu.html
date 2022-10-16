@@ -1,9 +1,60 @@
 {% extends 'base.html' %}
 {% block content %}
-
-<select></select>
 {% load render_table from django_tables2 %}
-{% render_table table %}
+{% load bootstrap3 %}
+<style>
+    .padding-0{
+    padding-right:0;
+    padding-left:0;
+}
+</style>
+
+<script>
+ var filterSelectedModel= function (e) {
+    model_name=e.value
+    window.location.href='/edit_menu/'+model_name
+};
+
+
+</script>
+<div class="container">
+    <div class="row">
+    <div class="col-md-3 padding-0">
+        {% if filter %}
+
+            <form  action="{% url 'edit_menu' model_name=model_name%}" method="get" class="form-inline">
+                <div class="form-group mb-2">
+                {% bootstrap_form filter.form layout='inline' %}
+                {% bootstrap_button 'filter'  %}
+                </div>
+            </form>
+        {% endif %}
+    </div>
+        <div class="col-md-2 padding-0">
+            <select type="select" class="form-control" id="model_name" onchange = 'filterSelectedModel(this)' >
+                {% for model in models %}
+                <option value="{{model}}" {% if model_name == model %} selected{% endif %} >{{model}}</option>
+                {%endfor%}
+            </select>
+        </div>
+    </div>
+    <div  class="row table-container table-responsive">
+    {% render_table table %}
+        <input
+                type="button"
+                class="btn  btn-success"
+                value="Add"
+                onclick="location.href='{% url 'add_item' model_name=model_name %}';"
+                style="width:10%"
+        >
+
+    {% block pagination %}
+    {% if table.page and table.paginator.num_pages > 1 %}
+    {{ block.super }}
+    {% endif %}
+    {% endblock pagination %}
+
+    </div>
 </div>
 {%endblock%}
 

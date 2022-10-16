@@ -149,8 +149,8 @@
                         $('.alert-success').text(response)
                         $('.alert-success').show()
                     }
-                    $('.alert-success').fadeOut('slow');
-                    $('.alert-danger').fadeOut('slow');
+                    $('.alert-success').fadeOut(duration=1600);
+                    $('.alert-danger').fadeOut(duration=40000);
 
                 }
             })
@@ -208,6 +208,7 @@
                     images.html('<div class="" style="background-color: #F5F7FA; text-align: center; padding: 40px 6px;text-transform: uppercase; color: black;font-size: 12px;cursor: pointer;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;width: 112px;margin-right: 12px;"><span>' + event.target.fileName + '</span></div>')
                 }
                 reader.readAsDataURL(uploader[0].files[0])
+                form_data=new FormData()
                 form_data.append('type', $('#datatype').val())
                 form_data.append(reader.fileName, uploader[0].files[0])
             })
@@ -227,11 +228,12 @@
                 var imageArr = []
 
 
-                for (var i = 0; i < form_data.length; i++) {
-                    imageArr.push({
-                        file: form_data[i]
-                    })
-                }
+//                for (var i = 0; i < form_data.length; i++) {
+//                    imageArr.push({
+//                        file: form_data[i]
+//                    })
+//                }
+//                alert(length)
                 //          form_data.append('files',imageArr)
                 sendData()
             })
@@ -259,11 +261,13 @@
 
         function sendData() {
             csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+            $('#load-saving').show();
+            $('#send').prop('disabled',true);
             $.ajax({
                 url: "/upload_file/",
                 method: "POST",
                 data: form_data,
-                cache: false,
+//                cache: false,
                 processData: false,
                 contentType: false,
                 headers: {
@@ -273,7 +277,10 @@
                 success: function(response) {
                     $('.alert-success').text("Data Saved Successfully")
                     $('.alert-success').show()
+                    $('#load-saving').hide()
                     $('.next').prop("disabled", false);
+                    $('#send').prop('disabled',false);
+                    $('#msform fieldset:nth-child(2)').remove()
                     $('#msform').append(response);
                     steps = $("fieldset").length;
                     $('.alert-success').fadeOut('slow');

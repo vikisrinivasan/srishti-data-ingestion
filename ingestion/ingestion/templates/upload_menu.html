@@ -36,15 +36,15 @@
                                 <section class="active">
 
                                     <select id="datatype">
-                                        <option value="TRAN">Transaction</option>
+                                        <option value="ER">EventRegistration</option>
                                         <option value="ET">Events</option>
-                                        <option value="Leads-ID">Leads (Individual)</option>
-                                        <option value="Leads-RD">Leads (Redistributors)</option>
-                                        <option value="PO">ProductCatalogue</option>
+                                        <option value="Influencers">Influencers</option>
+                                        <option value="Leads-RD">Institutional Clients</option>
+                                        <option value="PO">Leads (Photographers)</option>
                                     </select>
 
                                     <div class="select-option">
-                                        <div class="head">DataType</div>
+                                        <div class="head">Model Name</div>
                                         <div class="option"></div>
                                     </div>
                                     <div class="images">
@@ -61,6 +61,21 @@
                                                 <i class="fa fa-arrow-circle-right fa-lg"></i>
                                                 Save Data
                                             </li>
+                                            &nbsp;
+                                            &nbsp;
+                                            <button id='load-saving' class="btn btn-primary" type="button" disabled="" style="
+                                                    border: 2px solid #77a464;
+                                                    color: black;
+                                                    background-color: #F5F7FA;
+                                                    text-transform: uppercase;
+                                                    font-weight: 500;
+                                                    font-size: 12px;
+                                                    letter-spacing: 1px;
+                                                    display:none;
+                                                ">
+                                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                Saving...
+                                            </button>
                                         </ul>
                                     </div>
 

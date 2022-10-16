@@ -1,12 +1,10 @@
-from . import CameraDetails,ColorCode,contacts,EventContact,ItemMaster,Events,leads,ProductsOffered,Sales
+from . import EventRegistration,Events,Influencers,InstitutionalClients,ServiceRequest,PhotographerLeads,SocialMediaEnquiries
 __all__ = [
-    'CameraDetails',
-    'ColorCode',
-    'contacts',
-    'EventContact',
+    'EventRegistration',
     'Events',
-    'ItemMaster',
-    'leads',
-    'ProductsOffered',
-    'Sales'
+    'Influencers',
+    'InstitutionalClients',
+    'ServiceRequest',
+    'PhotographerLeads',
+    'SocialMediaEnquiries'
 ]
