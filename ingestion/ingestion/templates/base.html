@@ -24,10 +24,11 @@
                 <nav class="nav nav-masthead justify-content-center float-md-end">
 
                     <a class="nav-link" aria-current="page" href="{% url 'home' %}" style="color:black" >Home</a>
-                    <a class="nav-link" aria-current="page" href="{% url 'logout' %}" style="color:black" >Logout</a>
                     {% if user.is_superuser %}
                     <a class="nav-link" aria-current="page" href="{% url 'admin:index' %}" style="color:black">Admin</a>
                     {% endif %}
+                    <a class="nav-link" aria-current="page" href="{% url 'logout' %}" style="color:black" >Logout</a>
+
                 </nav>
             </div>
         </header>
