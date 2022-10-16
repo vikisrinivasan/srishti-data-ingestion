@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<link href="{% static 'css/home/upload_view.css' %}" rel="stylesheet">
+<link href="{% static 'css/fileupload/upload.css' %}" rel="stylesheet">
+<script src="{% static 'js/fileupload/upload.js' %}"></script>
+
+
+<input name="csrfmiddlewaretoken" value="{{csrf_token}}" hidden>
+
+<div class="row justify-content-center">
+
+    <div class="col-7">
+        <div class="alert alert-success" style="display:None">
+
+        </div>
+        <div class="alert alert-danger" style="display:None">
+
+        </div>
+
+
+        <div class="card px-0 pt-4">
+            <h3 id="heading" style="color:#77a464">Data Upload And Mapping Menu</h3>
+            <p style="color:black">Fill all form field to go to next step</p>
+            <form id="msform">
+                <fieldset>
+                    <div class="form-card">
+
+                        <div class="wrapper">
+
+
+                            <div class="sections">
+                                <section class="active">
+
+                                    <select id="datatype">
+                                        <option value="ER">EventRegistration</option>
+                                        <option value="ET">Events</option>
+                                        <option value="Influencers">Influencers</option>
+                                        <option value="Leads-RD">Institutional Clients</option>
+                                        <option value="PO">Leads (Photographers)</option>
+                                    </select>
+
+                                    <div class="select-option">
+                                        <div class="head">Model Name</div>
+                                        <div class="option"></div>
+                                    </div>
+                                    <div class="images">
+                                        <div class="data_file_name">
+
+                                        </div>
+                                        <div class="pic">
+                                            add
+                                        </div>
+                                    </div>
+                                    <div class="ways" id="send">
+                                        <ul>
+                                            <li class="active">
+                                                <i class="fa fa-arrow-circle-right fa-lg"></i>
+                                                Save Data
+                                            </li>
+                                            &nbsp;
+                                            &nbsp;
+                                            <button id='load-saving' class="btn btn-primary" type="button" disabled="" style="
+                                                    border: 2px solid #77a464;
+                                                    color: black;
+                                                    background-color: #F5F7FA;
+                                                    text-transform: uppercase;
+                                                    font-weight: 500;
+                                                    font-size: 12px;
+                                                    letter-spacing: 1px;
+                                                    display:none;
+                                                ">
+                                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                Saving...
+                                            </button>
+                                        </ul>
+                                    </div>
+
+
+                                </section>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <input type="button" name="next" class="next action-button" value="Next" disabled="true"/>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+{% else %}
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log In</a>
+{% endif %}
+
+
+{% endblock %}
